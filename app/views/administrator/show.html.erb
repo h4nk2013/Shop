@@ -1,0 +1,29 @@
+<h1><%= @user.name %></h1>
+<table border="1">
+  <thead>
+  <tr>
+    <th>Items Purchased</th>
+    <th>Categories</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+        <td>
+          <% items = find_item(@user) %>
+          <%= items.map {|item| item.name}.to_sentence %>
+        </td>
+        <td>
+          <% category = [] %>
+          <% items.each do |i| %>
+              <% category = (category + find_categories(i)).uniq %>
+          <% end %>
+          <%= category.map {|categories| categories.name}.to_sentence %>
+        </td>
+        </tr>
+    </tbody>
+</table>
+<h1>Recommended Items</h1>
+
+<% find_recommend(category) %>
+
+<%= (@recommend-items).map {|item| item.name}.to_sentence %>
